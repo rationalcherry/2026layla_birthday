@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4ede3">
+  <title>2026 레일라 탄일 기념 과거시험 & 피자잔치</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #f4ede3;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 0;
+    }
+
+    .main-image {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* 이미지 위의 투명 클릭 영역 */
+    .hotspot {
+      position: absolute;
+      z-index: 5;
+      display: block;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 999px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 백일장 '입장하기' 버튼 위치 */
+    #poem-btn {
+      left: 31.7%;
+      top: 54.3%;
+      width: 36.8%;
+      height: 4.2%;
+    }
+
+    /* 능력고사 '입장하기' 버튼 위치 */
+    #exam-btn {
+      left: 30.6%;
+      top: 80.8%;
+      width: 37.9%;
+      height: 4.4%;
+    }
+
+    .hotspot:focus-visible {
+      outline: 3px solid rgba(151, 80, 92, .65);
+      outline-offset: 2px;
+    }
+
+    /* 팝업 배경 */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(26, 24, 21, .72);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      position: relative;
+      width: min(92vw, 430px);
+      line-height: 0;
+    }
+
+    .popup-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+    }
+
+    /* 팝업 이미지 속 '알겠소' 버튼 위의 투명 클릭 영역 */
+    #close-btn {
+      position: absolute;
+      left: 26%;
+      top: 68.2%;
+      width: 48%;
+      height: 12.5%;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 999px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #close-btn:focus-visible {
+      outline: 3px solid rgba(255,255,255,.95);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <img
+      src="./main.png"
+      class="main-image"
+      alt="2026 레일라 탄일 기념 과거시험 & 피자잔치"
+    >
+
+    <a
+      id="poem-btn"
+      class="hotspot"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSfDZxY62UNDcJInVTALxlJ5fcfidZLvYHl8aQDFTOd2G8N-wA/viewform?usp=publish-editor"
+      aria-label="레일라 백일장 입장하기"
+    ></a>
+
+    <button
+      id="exam-btn"
+      class="hotspot"
+      type="button"
+      aria-label="레일라 능력고사 입장하기"
+    ></button>
+  </main>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="어명 안내">
+      <img
+        src="./popup.png"
+        class="popup-image"
+        alt="御命未降. 아직 어명이 내려오지 않았사옵니다. 시험 당일 다시 입궐하시옵소서."
+      >
+      <button id="close-btn" type="button" aria-label="알겠소"></button>
+    </div>
+  </div>
+
+  <script>
+    const examBtn = document.getElementById("exam-btn");
+    const modal = document.getElementById("modal");
+    const closeBtn = document.getElementById("close-btn");
+
+    function openModal() {
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    examBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("open")) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
